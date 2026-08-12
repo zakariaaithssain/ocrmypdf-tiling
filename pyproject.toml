@@ -29,8 +29,6 @@ dependencies = [
     "pillow>=9.0.0",
 ]
 
-[project.optional-dependencies]
-vl16 = ["ocrmypdf-vl16"]
 
 [project.entry-points.ocrmypdf]
 tiling = "ocrmypdf_tiling.plugin"

@@ -4,7 +4,7 @@ Loading this plugin (auto-loaded via the ``ocrmypdf`` entry point, or
 explicitly with ``--plugin ocrmypdf_tiling``) adds a ``Tiling`` option group.
 When ``--tiling`` is given it registers a ``TilingOcrEngine`` that wraps
 whatever inner OCR engine is selected (Tesseract by default, or PaddleOCR-VL
-1.6 via ``--tiling-engine vl16`` / the ``ocrmypdf_vl16`` plugin). When tiling
+1.6 via ``--ocr-engine vl16`` / the ``ocrmypdf_vl16`` plugin). When tiling
 is disabled the plugin is transparent and OCRmyPDF falls through to the
 built-in engine selection.
 
@@ -97,7 +97,7 @@ def add_options(parser):
         help='Enable the tiling wrapper engine (wraps the selected OCR engine).',
     )
     tiling.add_argument(
-        '--tiling-engine',
+        '--ocr-engine',
         choices=list(_ENGINE_NAMES),
         default=_ENGINE_DEFAULT,
         dest='tiling_engine',
@@ -156,7 +156,7 @@ def check_options(options):
             from ocrmypdf_vl16.plugin import PaddleVL16Engine  # noqa: F401
         except ImportError as exc:
             raise MissingDependencyError(
-                '--tiling-engine vl16 requires the "ocrmypdf_vl16" package '
+                '--ocr-engine vl16 requires the "ocrmypdf_vl16" package '
                 '(install with: uv add ocrmypdf-vl16, or the [vl16] extra of '
                 'ocrmypdf-tiling).'
             ) from exc
@@ -210,7 +210,7 @@ def _resolve_inner(options):
             from ocrmypdf_vl16.plugin import PaddleVL16Engine
         except ImportError as exc:
             raise MissingDependencyError(
-                '--tiling-engine vl16 requires the "ocrmypdf_vl16" package.'
+                '--ocr-engine vl16 requires the "ocrmypdf_vl16" package.'
             ) from exc
         return PaddleVL16Engine()
 
