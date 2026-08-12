@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocrmypdf-tiling"
+version = "0.1.0"
+description = "Engine-agnostic tiling plugin for OCRmyPDF: tiles oversized pages, wraps any OCR engine, stitches results."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MPL-2.0" }
+keywords = ["ocr", "pdf", "ocrmypdf", "tiling", "document-ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Graphics :: Capture :: Scanners",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+    "ocrmypdf>=17.0.0",
+    "pillow>=9.0.0",
+]
+
+[project.optional-dependencies]
+vl16 = ["ocrmypdf-vl16"]
+
+[project.entry-points.ocrmypdf]
+tiling = "ocrmypdf_tiling.plugin"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
